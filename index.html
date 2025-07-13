@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>业务公式 BI 看板</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 侧边栏导航 -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-chart-line"></i> BI看板</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#dashboard" class="active"><i class="fas fa-tachometer-alt"></i> 总览</a></li>
+            <li><a href="#formula"><i class="fas fa-calculator"></i> 业务公式</a></li>
+            <li><a href="#target-map"><i class="fas fa-map-marked-alt"></i> 目标地图</a></li>
+            <li><a href="#collaboration"><i class="fas fa-users"></i> 协同看板</a></li>
+            <li><a href="#okr"><i class="fas fa-bullseye"></i> OKR关联</a></li>
+        </ul>
+    </nav>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <!-- 头部 -->
+        <header class="header">
+            <div class="header-left">
+                <h1>业务公式 BI 看板</h1>
+                <p>实时监控业务指标，透明化目标管理</p>
+            </div>
+            <div class="header-right">
+                <span class="date" id="currentDate"></span>
+                <div class="user-profile">
+                    <i class="fas fa-user-circle"></i>
+                    <span>管理员</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 总览页面 -->
+        <section id="dashboard" class="content-section active">
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-dollar-sign"></i> 总利润</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-value">¥2,580,000</div>
+                        <div class="metric-change positive">+15.6%</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> 总收入</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-value">¥8,650,000</div>
+                        <div class="metric-change positive">+12.3%</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-bar"></i> 总成本</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-value">¥6,070,000</div>
+                        <div class="metric-change negative">+8.7%</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-percentage"></i> 利润率</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="metric-value">29.8%</div>
+                        <div class="metric-change positive">+2.1%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-charts">
+                <div class="chart-container">
+                    <h3>收入趋势</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>成本分析</h3>
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 业务公式页面 -->
+        <section id="formula" class="content-section">
+            <div class="formula-container">
+                <h2>业务公式拆解</h2>
+                
+                <!-- 核心公式 -->
+                <div class="formula-section">
+                    <h3>核心公式</h3>
+                    <div class="formula-box main-formula">
+                        <div class="formula-title">总利润 = 总收入 - 总成本</div>
+                        <div class="formula-detail">
+                            = (网红分销收入 + 自营销售收入) - (商品成本 + 营销成本 + 运营成本)
+                        </div>
+                        <div class="formula-departments">
+                            <span class="dept">渠道拓展</span>
+                            <span class="dept">用户运营</span>
+                            <span class="dept">产品组</span>
+                            <span class="dept">市场部</span>
+                            <span class="dept">交付组</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 一级拆解 -->
+                <div class="formula-section">
+                    <h3>一级拆解（渠道维度）</h3>
+                    <div class="formula-grid">
+                        <div class="formula-box">
+                            <div class="formula-title">网红分销收入</div>
+                            <div class="formula-detail">
+                                = Σ(有效红人数 × 场均GMV × 合作频次)
+                            </div>
+                        </div>
+                        <div class="formula-box">
+                            <div class="formula-title">自营销售收入</div>
+                            <div class="formula-detail">
+                                = 私域GMV + 线下GMV
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 二级拆解 -->
+                <div class="formula-section">
+                    <h3>二级拆解（岗位责任源）</h3>
+                    <div class="formula-grid">
+                        <div class="formula-box">
+                            <div class="formula-title">私域GMV</div>
+                            <div class="formula-detail">
+                                = 引流用户数 × (直播转化率 × 直播客单价 + 社群转化率 × 社群客单价)
+                            </div>
+                            <div class="responsible">责任：社群运营</div>
+                        </div>
+                        <div class="formula-box">
+                            <div class="formula-title">线下GMV</div>
+                            <div class="formula-detail">
+                                = 门店数 × 月均店效
+                            </div>
+                        </div>
+                        <div class="formula-box">
+                            <div class="formula-title">引流用户数</div>
+                            <div class="formula-detail">
+                                = 笔记发布量 × 单篇曝光量 × 点击率 × 留资率 × 私域添加率
+                            </div>
+                            <div class="responsible">责任：小红书BD、用户运营</div>
+                        </div>
+                        <div class="formula-box">
+                            <div class="formula-title">有效红人数</div>
+                            <div class="formula-detail">
+                                = 签约红人数 × 开播率 × (1 - 退货率)
+                            </div>
+                            <div class="responsible">责任：渠道运营、产品组</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 成本控制公式 -->
+                <div class="formula-section">
+                    <h3>成本控制公式</h3>
+                    <div class="formula-grid">
+                        <div class="formula-box cost-formula">
+                            <div class="formula-title">营销成本</div>
+                            <div class="formula-detail">
+                                = Σ(红人GMV × 佣金率) + 内容制作费 + k × 引流用户数
+                            </div>
+                            <div class="responsible">责任：商务BD、新媒体、获客成本</div>
+                        </div>
+                        <div class="formula-box cost-formula">
+                            <div class="formula-title">运营成本</div>
+                            <div class="formula-detail">
+                                = 人力成本 + 物流成本 + 系统维护费
+                            </div>
+                            <div class="responsible">责任：HR、交付组、数智化</div>
+                        </div>
+                        <div class="formula-box cost-formula">
+                            <div class="formula-title">商品成本</div>
+                            <div class="formula-detail">
+                                = 销售件数 × 单件成本 × (1 + 损耗率)
+                            </div>
+                            <div class="responsible">责任：产品经理、仓储</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 关键监控指标映射 -->
+                <div class="formula-section">
+                    <h3>关键监控指标映射</h3>
+                    <div class="kpi-mapping">
+                        <div class="kpi-group">
+                            <h4>责任岗位 → 利润影响因子</h4>
+                            <div class="kpi-items">
+                                <div class="kpi-item">
+                                    <div class="position">小红书BD</div>
+                                    <div class="kpi">客单价 × 私域转化率 × 私域添加率</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="position">用户运营</div>
+                                    <div class="kpi">老客数 × (LTV - 维护成本)</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="position">渠道运营</div>
+                                    <div class="kpi">场均GMV × (1 - 佣金率)</div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="position">产品经理</div>
+                                    <div class="kpi">-GMV × 边际成本</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 目标地图页面 -->
+        <section id="target-map" class="content-section">
+            <div class="target-map-container">
+                <h2>目标地图</h2>
+                <div class="map-view">
+                    <div id="targetMap" style="width: 100%; height: 500px;"></div>
+                </div>
+                <div class="map-metrics">
+                    <div class="metric-card">
+                        <h4>华东区</h4>
+                        <div class="metric-value">¥3,200,000</div>
+                        <div class="target-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                            <span>85% 完成</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>华北区</h4>
+                        <div class="metric-value">¥2,800,000</div>
+                        <div class="target-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                            <span>92% 完成</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>华南区</h4>
+                        <div class="metric-value">¥2,650,000</div>
+                        <div class="target-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%"></div>
+                            </div>
+                            <span>78% 完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 协同看板页面 -->
+        <section id="collaboration" class="content-section">
+            <div class="collaboration-container">
+                <h2>协同看板 - 指标人员绑定</h2>
+                <div class="team-metrics">
+                    <div class="team-card">
+                        <div class="team-header">
+                            <h3>渠道拓展组</h3>
+                            <span class="team-status active">活跃</span>
+                        </div>
+                        <div class="team-members">
+                            <div class="member">
+                                <div class="member-info">
+                                    <img src="https://via.placeholder.com/40" alt="avatar">
+                                    <div>
+                                        <div class="member-name">张三</div>
+                                        <div class="member-role">小红书BD</div>
+                                    </div>
+                                </div>
+                                <div class="member-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">引流用户数</span>
+                                        <span class="metric-value">1,250</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">转化率</span>
+                                        <span class="metric-value">12.5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member">
+                                <div class="member-info">
+                                    <img src="https://via.placeholder.com/40" alt="avatar">
+                                    <div>
+                                        <div class="member-name">李四</div>
+                                        <div class="member-role">渠道运营</div>
+                                    </div>
+                                </div>
+                                <div class="member-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">有效红人数</span>
+                                        <span class="metric-value">85</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">场均GMV</span>
+                                        <span class="metric-value">¥15,800</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-header">
+                            <h3>用户运营组</h3>
+                            <span class="team-status active">活跃</span>
+                        </div>
+                        <div class="team-members">
+                            <div class="member">
+                                <div class="member-info">
+                                    <img src="https://via.placeholder.com/40" alt="avatar">
+                                    <div>
+                                        <div class="member-name">王五</div>
+                                        <div class="member-role">社群运营</div>
+                                    </div>
+                                </div>
+                                <div class="member-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">私域GMV</span>
+                                        <span class="metric-value">¥180,000</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">用户LTV</span>
+                                        <span class="metric-value">¥1,250</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-header">
+                            <h3>产品经理组</h3>
+                            <span class="team-status warning">关注</span>
+                        </div>
+                        <div class="team-members">
+                            <div class="member">
+                                <div class="member-info">
+                                    <img src="https://via.placeholder.com/40" alt="avatar">
+                                    <div>
+                                        <div class="member-name">赵六</div>
+                                        <div class="member-role">产品经理</div>
+                                    </div>
+                                </div>
+                                <div class="member-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">退货率</span>
+                                        <span class="metric-value">8.5%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">边际成本</span>
+                                        <span class="metric-value">¥45</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OKR关联页面 -->
+        <section id="okr" class="content-section">
+            <div class="okr-container">
+                <h2>OKR关联 - 公司-部门-个人</h2>
+                <div class="okr-hierarchy">
+                    <!-- 公司层级 -->
+                    <div class="okr-level company-level">
+                        <h3><i class="fas fa-building"></i> 公司目标</h3>
+                        <div class="okr-card">
+                            <div class="okr-title">2024年度营收目标</div>
+                            <div class="okr-objective">实现年收入1.2亿元，利润率30%</div>
+                            <div class="okr-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 72%"></div>
+                                </div>
+                                <span>72% 完成</span>
+                            </div>
+                            <div class="okr-kr">
+                                <div class="kr-item">
+                                    <span>KR1: 网红分销收入达到7000万</span>
+                                    <span class="kr-progress">85%</span>
+                                </div>
+                                <div class="kr-item">
+                                    <span>KR2: 自营销售收入达到5000万</span>
+                                    <span class="kr-progress">65%</span>
+                                </div>
+                                <div class="kr-item">
+                                    <span>KR3: 整体利润率保持在30%以上</span>
+                                    <span class="kr-progress">75%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 部门层级 -->
+                    <div class="okr-level department-level">
+                        <h3><i class="fas fa-users"></i> 部门目标</h3>
+                        <div class="okr-grid">
+                            <div class="okr-card">
+                                <div class="okr-title">渠道拓展部</div>
+                                <div class="okr-objective">网红分销收入7000万</div>
+                                <div class="okr-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span>85% 完成</span>
+                                </div>
+                                <div class="okr-kr">
+                                    <div class="kr-item">
+                                        <span>有效红人数量500+</span>
+                                        <span class="kr-progress">90%</span>
+                                    </div>
+                                    <div class="kr-item">
+                                        <span>场均GMV 2万+</span>
+                                        <span class="kr-progress">80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="okr-card">
+                                <div class="okr-title">用户运营部</div>
+                                <div class="okr-objective">自营销售收入5000万</div>
+                                <div class="okr-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%"></div>
+                                    </div>
+                                    <span>65% 完成</span>
+                                </div>
+                                <div class="okr-kr">
+                                    <div class="kr-item">
+                                        <span>私域GMV 3000万</span>
+                                        <span class="kr-progress">70%</span>
+                                    </div>
+                                    <div class="kr-item">
+                                        <span>线下GMV 2000万</span>
+                                        <span class="kr-progress">60%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="okr-card">
+                                <div class="okr-title">产品部</div>
+                                <div class="okr-objective">成本控制与优化</div>
+                                <div class="okr-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                    <span>75% 完成</span>
+                                </div>
+                                <div class="okr-kr">
+                                    <div class="kr-item">
+                                        <span>退货率控制在5%以下</span>
+                                        <span class="kr-progress">60%</span>
+                                    </div>
+                                    <div class="kr-item">
+                                        <span>边际成本降低15%</span>
+                                        <span class="kr-progress">90%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 个人层级 -->
+                    <div class="okr-level personal-level">
+                        <h3><i class="fas fa-user"></i> 个人目标</h3>
+                        <div class="okr-grid">
+                            <div class="okr-card">
+                                <div class="okr-title">张三 - 小红书BD</div>
+                                <div class="okr-objective">月度引流用户数1500+</div>
+                                <div class="okr-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 83%"></div>
+                                    </div>
+                                    <span>83% 完成</span>
+                                </div>
+                                <div class="okr-kr">
+                                    <div class="kr-item">
+                                        <span>笔记发布量50+</span>
+                                        <span class="kr-progress">100%</span>
+                                    </div>
+                                    <div class="kr-item">
+                                        <span>私域添加率12%+</span>
+                                        <span class="kr-progress">66%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="okr-card">
+                                <div class="okr-title">李四 - 渠道运营</div>
+                                <div class="okr-objective">维护有效红人数100+</div>
+                                <div class="okr-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span>85% 完成</span>
+                                </div>
+                                <div class="okr-kr">
+                                    <div class="kr-item">
+                                        <span>开播率90%+</span>
+                                        <span class="kr-progress">95%</span>
+                                    </div>
+                                    <div class="kr-item">
+                                        <span>合作频次2次/月</span>
+                                        <span class="kr-progress">75%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="okr-card">
+                                <div class="okr-title">王五 - 社群运营</div>
+                                <div class="okr-objective">月度私域GMV20万+</div>
+                                <div class="okr-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span>90% 完成</span>
+                                </div>
+                                <div class="okr-kr">
+                                    <div class="kr-item">
+                                        <span>直播转化率8%+</span>
+                                        <span class="kr-progress">87%</span>
+                                    </div>
+                                    <div class="kr-item">
+                                        <span>客单价400+</span>
+                                        <span class="kr-progress">93%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html> 
