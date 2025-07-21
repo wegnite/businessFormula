@@ -1,0 +1,38 @@
+# Vibe Meet AI
+
+> Vibe Meet AI is the best AI meeting note taker and meeting assistant platform, providing real-time transcription, smart summaries, and automated meeting minutes for Teams, Zoom, and Google Meet.
+
+We help over 100,000+ professionals transform their meetings with AI-powered note-taking that achieves 98% accuracy across 50+ languages. Our platform integrates seamlessly with popular meeting tools to generate instant, actionable meeting summaries.
+
+## Core Features
+- [AI Meeting Note Taker](https://vibemeetai.com/#features): Real-time transcription with 98% accuracy across 50+ languages
+- [Meeting Minutes Generator](https://vibemeetai.com/#features): Automated smart summaries with key decisions and action items
+- [Teams Integration](https://vibemeetai.com/#features): Native Microsoft Teams AI meeting notes functionality
+- [Meeting Analytics](https://vibemeetai.com/#features): Advanced insights into meeting patterns and productivity
+
+## How It Works
+- [Setup Process](https://vibemeetai.com/#how-it-works): Connect your meeting platform in under 30 seconds
+- [AI Processing](https://vibemeetai.com/#how-it-works): Real-time AI transcription and analysis during meetings
+- [Instant Results](https://vibemeetai.com/#how-it-works): Get formatted meeting minutes within 1-2 minutes after meetings end
+
+## Pricing & Plans
+- [Free Plan](https://vibemeetai.com/#pricing): 5 hours of AI meeting notes per month for up to 3 participants
+- [Pro Plan](https://vibemeetai.com/#pricing): $29/month for unlimited AI meeting notes and advanced features
+- [Enterprise Plan](https://vibemeetai.com/#pricing): Custom pricing with dedicated support and advanced security
+
+## Customer Resources
+- [Customer Reviews](https://vibemeetai.com/#testimonials): Real testimonials from 100,000+ satisfied users
+- [FAQ](https://vibemeetai.com/#faq): Common questions about AI meeting note accuracy, security, and integrations
+- [Contact & Free Trial](https://vibemeetai.com/#contact): Start your free trial in 30 seconds, no credit card required
+
+## Company Info
+- [About Vibe Meet AI](https://vibemeetai.com/#testimonials): Leading AI meeting assistant platform trusted by professionals worldwide
+- [Security & Privacy](https://vibemeetai.com/#faq): Enterprise-grade encryption, SOC 2, GDPR, and HIPAA compliant
+- [Integrations](https://vibemeetai.com/#features): Works with Microsoft Teams, Zoom, Google Meet, and other meeting platforms
+
+## Key Benefits
+- Save 8-12 hours per month on meeting note-taking
+- Improve meeting participation by 30-50% 
+- Never miss important decisions or action items
+- Generate professional meeting minutes instantly
+- Support for global teams with 50+ language support 

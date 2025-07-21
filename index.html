@@ -1,557 +1,581 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM928ZVYZB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MM928ZVYZB');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>业务公式 BI 看板</title>
+    <title>Vibe Meet AI - Best AI Meeting Note Taker | Meeting Minutes</title>
+    <meta name="description" content="Transform meetings with Vibe Meet AI, the best AI meeting note taker. Generate instant notes, minutes, and summaries. Works with Teams and Zoom. Try free!">
+    <meta name="keywords" content="ai meeting note taker, ai meeting notes, ai meeting minutes, teams ai meeting notes, ai vibe meet">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Vibe Meet AI">
+    <meta http-equiv="X-Robots-Tag" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://vibemeetai.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Vibe Meet AI - Best AI Meeting Note Taker">
+    <meta property="og:description" content="The best AI meeting assistant that automatically generates meeting notes and summaries. Works with Teams, Zoom, Google Meet.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vibemeetai.com/">
+    <meta property="og:image" content="https://vibemeetai.com/images/vibe-meet-ai-og.jpg">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vibe Meet AI - Best AI Meeting Note Taker">
+    <meta name="twitter:description" content="The best AI meeting assistant for automatic meeting notes and summaries.">
+    <meta name="twitter:image" content="https://vibemeetai.com/images/vibe-meet-ai-twitter.jpg">
+    <meta name="twitter:site" content="@vibemeetai">
+    
+    <!-- Additional SEO Tags -->
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="msapplication-TileColor" content="#4f46e5">
+    <meta name="application-name" content="Vibe Meet AI">
+    <meta name="apple-mobile-web-app-title" content="Vibe Meet AI">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Vibe Meet AI",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "The best AI meeting note taker and AI meeting assistant for automatic meeting transcription and summary generation",
+        "url": "https://vibemeetai.com/",
+        "featureList": [
+            "AI Meeting Note Taker",
+            "Real-time Transcription",
+            "Teams Integration", 
+            "Meeting Minutes Generator",
+            "AI Meeting Assistant",
+            "Multi-language Support"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "2847"
+        }
+    }
+    </script>
 </head>
 <body>
-    <!-- 侧边栏导航 -->
-    <nav class="sidebar">
-        <div class="sidebar-header">
-            <h2><i class="fas fa-chart-line"></i> BI看板</h2>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-robot"></i>
+                <span>Vibe Meet AI</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="#" class="btn-secondary">Sign In</a>
+                <a href="#" class="btn-primary">Try Free</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <ul class="sidebar-menu">
-            <li><a href="#dashboard" class="active"><i class="fas fa-tachometer-alt"></i> 总览</a></li>
-            <li><a href="#formula"><i class="fas fa-calculator"></i> 业务公式</a></li>
-            <li><a href="#target-map"><i class="fas fa-map-marked-alt"></i> 目标地图</a></li>
-            <li><a href="#collaboration"><i class="fas fa-users"></i> 协同看板</a></li>
-            <li><a href="#okr"><i class="fas fa-bullseye"></i> OKR关联</a></li>
-        </ul>
     </nav>
 
-    <!-- 主内容区域 -->
-    <main class="main-content">
-        <!-- 头部 -->
-        <header class="header">
-            <div class="header-left">
-                <h1>业务公式 BI 看板</h1>
-                <p>实时监控业务指标，透明化目标管理</p>
-            </div>
-            <div class="header-right">
-                <span class="date" id="currentDate"></span>
-                <div class="user-profile">
-                    <i class="fas fa-user-circle"></i>
-                    <span>管理员</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>AI Meeting Note Taker for Smart Teams</h1>
+                    <p class="hero-subtitle">Transform your meetings with Vibe Meet AI, the world's most accurate AI meeting assistant. Get instant meeting notes and summaries from any platform.</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">Accuracy Rate</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Languages</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100K+</span>
+                            <span class="stat-label">Users</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary large">Start Free Trial</a>
+                        <a href="#demo" class="btn-secondary large">
+                            <i class="fas fa-play"></i>
+                            Watch Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Meeting Assistant Dashboard" />
                 </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- 总览页面 -->
-        <section id="dashboard" class="content-section active">
-            <div class="dashboard-cards">
-                <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-dollar-sign"></i> 总利润</h3>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Key Features</h2>
+                <p>Enterprise-grade AI meeting assistant with advanced capabilities</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microphone-alt"></i>
                     </div>
-                    <div class="card-body">
-                        <div class="metric-value">¥2,580,000</div>
-                        <div class="metric-change positive">+15.6%</div>
-                    </div>
+                    <h3>Real-time Meeting Notes</h3>
+                    <p>Our advanced AI meeting note taker captures every word with 98% accuracy, providing instant transcription across 50+ languages.</p>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-chart-line"></i> 总收入</h3>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <div class="card-body">
-                        <div class="metric-value">¥8,650,000</div>
-                        <div class="metric-change positive">+12.3%</div>
-                    </div>
+                    <h3>Smart AI Meeting Minutes</h3>
+                    <p>Automatically generate structured AI meeting minutes with key decisions, action items, and follow-ups using our intelligent summarization.</p>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-chart-bar"></i> 总成本</h3>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fab fa-microsoft"></i>
                     </div>
-                    <div class="card-body">
-                        <div class="metric-value">¥6,070,000</div>
-                        <div class="metric-change negative">+8.7%</div>
-                    </div>
+                    <h3>Teams AI Meeting Notes</h3>
+                    <p>Seamless integration with Microsoft Teams, Zoom, and Google Meet for effortless Teams AI meeting notes generation.</p>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-percentage"></i> 利润率</h3>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
                     </div>
-                    <div class="card-body">
-                        <div class="metric-value">29.8%</div>
-                        <div class="metric-change positive">+2.1%</div>
+                    <h3>AI Meeting Agenda</h3>
+                    <p>Smart AI meeting agenda creation and management to keep your meetings focused and productive.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
+                    <h3>Enterprise Security</h3>
+                    <p>Bank-level encryption and compliance with SOC 2, GDPR, and HIPAA standards for complete data protection.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-analytics"></i>
+                    </div>
+                    <h3>Meeting Analytics</h3>
+                    <p>Gain insights into meeting patterns, participation, and productivity with our advanced analytics dashboard.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="dashboard-charts">
-                <div class="chart-container">
-                    <h3>收入趋势</h3>
-                    <canvas id="revenueChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3>成本分析</h3>
-                    <canvas id="costChart"></canvas>
-                </div>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Start taking meeting notes in 3 simple steps</p>
             </div>
-        </section>
-
-        <!-- 业务公式页面 -->
-        <section id="formula" class="content-section">
-            <div class="formula-container">
-                <h2>业务公式拆解</h2>
-                
-                <!-- 核心公式 -->
-                <div class="formula-section">
-                    <h3>核心公式</h3>
-                    <div class="formula-box main-formula">
-                        <div class="formula-title">总利润 = 总收入 - 总成本</div>
-                        <div class="formula-detail">
-                            = (网红分销收入 + 自营销售收入) - (商品成本 + 营销成本 + 运营成本)
-                        </div>
-                        <div class="formula-departments">
-                            <span class="dept">渠道拓展</span>
-                            <span class="dept">用户运营</span>
-                            <span class="dept">产品组</span>
-                            <span class="dept">市场部</span>
-                            <span class="dept">交付组</span>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Connect Your Platform</h3>
+                        <p>Integrate with Zoom, Teams, Google Meet, or any meeting platform. Our AI meeting assistant works everywhere.</p>
+                        <div class="step-platforms">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Meet_icon_%282020%29.svg" alt="Google Meet" width="40">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Microsoft_Teams_logo.svg/512px-Microsoft_Teams_logo.svg.png" alt="Microsoft Teams" width="40">
+                            <img src="https://assets.zoom.us/images/en-us/desktop/generic/zoom-logo.png" alt="Zoom" width="40">
                         </div>
                     </div>
                 </div>
-
-                <!-- 一级拆解 -->
-                <div class="formula-section">
-                    <h3>一级拆解（渠道维度）</h3>
-                    <div class="formula-grid">
-                        <div class="formula-box">
-                            <div class="formula-title">网红分销收入</div>
-                            <div class="formula-detail">
-                                = Σ(有效红人数 × 场均GMV × 合作频次)
-                            </div>
-                        </div>
-                        <div class="formula-box">
-                            <div class="formula-title">自营销售收入</div>
-                            <div class="formula-detail">
-                                = 私域GMV + 线下GMV
-                            </div>
-                        </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>AI Records & Transcribes</h3>
+                        <p>Our AI meeting note taker automatically captures, transcribes, and analyzes your meeting in real-time with industry-leading accuracy.</p>
                     </div>
                 </div>
-
-                <!-- 二级拆解 -->
-                <div class="formula-section">
-                    <h3>二级拆解（岗位责任源）</h3>
-                    <div class="formula-grid">
-                        <div class="formula-box">
-                            <div class="formula-title">私域GMV</div>
-                            <div class="formula-detail">
-                                = 引流用户数 × (直播转化率 × 直播客单价 + 社群转化率 × 社群客单价)
-                            </div>
-                            <div class="responsible">责任：社群运营</div>
-                        </div>
-                        <div class="formula-box">
-                            <div class="formula-title">线下GMV</div>
-                            <div class="formula-detail">
-                                = 门店数 × 月均店效
-                            </div>
-                        </div>
-                        <div class="formula-box">
-                            <div class="formula-title">引流用户数</div>
-                            <div class="formula-detail">
-                                = 笔记发布量 × 单篇曝光量 × 点击率 × 留资率 × 私域添加率
-                            </div>
-                            <div class="responsible">责任：小红书BD、用户运营</div>
-                        </div>
-                        <div class="formula-box">
-                            <div class="formula-title">有效红人数</div>
-                            <div class="formula-detail">
-                                = 签约红人数 × 开播率 × (1 - 退货率)
-                            </div>
-                            <div class="responsible">责任：渠道运营、产品组</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 成本控制公式 -->
-                <div class="formula-section">
-                    <h3>成本控制公式</h3>
-                    <div class="formula-grid">
-                        <div class="formula-box cost-formula">
-                            <div class="formula-title">营销成本</div>
-                            <div class="formula-detail">
-                                = Σ(红人GMV × 佣金率) + 内容制作费 + k × 引流用户数
-                            </div>
-                            <div class="responsible">责任：商务BD、新媒体、获客成本</div>
-                        </div>
-                        <div class="formula-box cost-formula">
-                            <div class="formula-title">运营成本</div>
-                            <div class="formula-detail">
-                                = 人力成本 + 物流成本 + 系统维护费
-                            </div>
-                            <div class="responsible">责任：HR、交付组、数智化</div>
-                        </div>
-                        <div class="formula-box cost-formula">
-                            <div class="formula-title">商品成本</div>
-                            <div class="formula-detail">
-                                = 销售件数 × 单件成本 × (1 + 损耗率)
-                            </div>
-                            <div class="responsible">责任：产品经理、仓储</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 关键监控指标映射 -->
-                <div class="formula-section">
-                    <h3>关键监控指标映射</h3>
-                    <div class="kpi-mapping">
-                        <div class="kpi-group">
-                            <h4>责任岗位 → 利润影响因子</h4>
-                            <div class="kpi-items">
-                                <div class="kpi-item">
-                                    <div class="position">小红书BD</div>
-                                    <div class="kpi">客单价 × 私域转化率 × 私域添加率</div>
-                                </div>
-                                <div class="kpi-item">
-                                    <div class="position">用户运营</div>
-                                    <div class="kpi">老客数 × (LTV - 维护成本)</div>
-                                </div>
-                                <div class="kpi-item">
-                                    <div class="position">渠道运营</div>
-                                    <div class="kpi">场均GMV × (1 - 佣金率)</div>
-                                </div>
-                                <div class="kpi-item">
-                                    <div class="position">产品经理</div>
-                                    <div class="kpi">-GMV × 边际成本</div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Get Instant AI Meeting Minutes</h3>
+                        <p>Receive perfectly formatted AI meeting minutes, summaries, and action items within seconds of your meeting ending.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 目标地图页面 -->
-        <section id="target-map" class="content-section">
-            <div class="target-map-container">
-                <h2>目标地图</h2>
-                <div class="map-view">
-                    <div id="targetMap" style="width: 100%; height: 500px;"></div>
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="container">
+            <div class="section-header">
+                <h2>Product Comparison</h2>
+                <p>See how we compare to other solutions</p>
+            </div>
+            <div class="comparison-table">
+                <div class="comparison-row header-row">
+                    <div class="feature-col">Feature</div>
+                    <div class="vibe-col">Vibe Meet AI</div>
+                    <div class="competitor-col">Others</div>
                 </div>
-                <div class="map-metrics">
-                    <div class="metric-card">
-                        <h4>华东区</h4>
-                        <div class="metric-value">¥3,200,000</div>
-                        <div class="target-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 85%"></div>
-                            </div>
-                            <span>85% 完成</span>
-                        </div>
+                <div class="comparison-row">
+                    <div class="feature-col">AI Meeting Note Accuracy</div>
+                    <div class="vibe-col">
+                        <i class="fas fa-check"></i>
+                        98%+
                     </div>
-                    <div class="metric-card">
-                        <h4>华北区</h4>
-                        <div class="metric-value">¥2,800,000</div>
-                        <div class="target-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 92%"></div>
-                            </div>
-                            <span>92% 完成</span>
-                        </div>
+                    <div class="competitor-col">
+                        <i class="fas fa-times"></i>
+                        85%
                     </div>
-                    <div class="metric-card">
-                        <h4>华南区</h4>
-                        <div class="metric-value">¥2,650,000</div>
-                        <div class="target-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 78%"></div>
-                            </div>
-                            <span>78% 完成</span>
-                        </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-col">Teams AI Meeting Notes</div>
+                    <div class="vibe-col">
+                        <i class="fas fa-check"></i>
+                        Native Integration
+                    </div>
+                    <div class="competitor-col">
+                        <i class="fas fa-times"></i>
+                        Limited
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-col">Real-time Processing</div>
+                    <div class="vibe-col">
+                        <i class="fas fa-check"></i>
+                        Instant
+                    </div>
+                    <div class="competitor-col">
+                        <i class="fas fa-times"></i>
+                        Delayed
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-col">AI Meeting Minutes Quality</div>
+                    <div class="vibe-col">
+                        <i class="fas fa-check"></i>
+                        Smart Summaries
+                    </div>
+                    <div class="competitor-col">
+                        <i class="fas fa-times"></i>
+                        Basic
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 协同看板页面 -->
-        <section id="collaboration" class="content-section">
-            <div class="collaboration-container">
-                <h2>协同看板 - 指标人员绑定</h2>
-                <div class="team-metrics">
-                    <div class="team-card">
-                        <div class="team-header">
-                            <h3>渠道拓展组</h3>
-                            <span class="team-status active">活跃</span>
-                        </div>
-                        <div class="team-members">
-                            <div class="member">
-                                <div class="member-info">
-                                    <img src="https://via.placeholder.com/40" alt="avatar">
-                                    <div>
-                                        <div class="member-name">张三</div>
-                                        <div class="member-role">小红书BD</div>
-                                    </div>
-                                </div>
-                                <div class="member-metrics">
-                                    <div class="metric">
-                                        <span class="metric-label">引流用户数</span>
-                                        <span class="metric-value">1,250</span>
-                                    </div>
-                                    <div class="metric">
-                                        <span class="metric-label">转化率</span>
-                                        <span class="metric-value">12.5%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="member">
-                                <div class="member-info">
-                                    <img src="https://via.placeholder.com/40" alt="avatar">
-                                    <div>
-                                        <div class="member-name">李四</div>
-                                        <div class="member-role">渠道运营</div>
-                                    </div>
-                                </div>
-                                <div class="member-metrics">
-                                    <div class="metric">
-                                        <span class="metric-label">有效红人数</span>
-                                        <span class="metric-value">85</span>
-                                    </div>
-                                    <div class="metric">
-                                        <span class="metric-label">场均GMV</span>
-                                        <span class="metric-value">¥15,800</span>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Pricing Plans</h2>
+                <p>Start free, scale as you grow</p>
+            </div>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3>Free</h3>
+                        <div class="price">
+                            <span class="amount">$0</span>
+                            <span class="period">/month</span>
                         </div>
                     </div>
-
-                    <div class="team-card">
-                        <div class="team-header">
-                            <h3>用户运营组</h3>
-                            <span class="team-status active">活跃</span>
-                        </div>
-                        <div class="team-members">
-                            <div class="member">
-                                <div class="member-info">
-                                    <img src="https://via.placeholder.com/40" alt="avatar">
-                                    <div>
-                                        <div class="member-name">王五</div>
-                                        <div class="member-role">社群运营</div>
-                                    </div>
-                                </div>
-                                <div class="member-metrics">
-                                    <div class="metric">
-                                        <span class="metric-label">私域GMV</span>
-                                        <span class="metric-value">¥180,000</span>
-                                    </div>
-                                    <div class="metric">
-                                        <span class="metric-label">用户LTV</span>
-                                        <span class="metric-value">¥1,250</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 5 hours AI meeting notes</li>
+                        <li><i class="fas fa-check"></i> Basic AI meeting minutes</li>
+                        <li><i class="fas fa-check"></i> Up to 3 participants</li>
+                        <li><i class="fas fa-check"></i> Email support</li>
+                    </ul>
+                    <a href="#" class="plan-btn btn-secondary">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="plan-badge">Most Popular</div>
+                    <div class="plan-header">
+                        <h3>Pro</h3>
+                        <div class="price">
+                            <span class="amount">$29</span>
+                            <span class="period">/month</span>
                         </div>
                     </div>
-
-                    <div class="team-card">
-                        <div class="team-header">
-                            <h3>产品经理组</h3>
-                            <span class="team-status warning">关注</span>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Unlimited AI meeting notes</li>
+                        <li><i class="fas fa-check"></i> Advanced AI meeting assistant</li>
+                        <li><i class="fas fa-check"></i> Teams AI meeting notes</li>
+                        <li><i class="fas fa-check"></i> AI meeting agenda</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                    </ul>
+                    <a href="#" class="plan-btn btn-primary">Start Pro Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3>Enterprise</h3>
+                        <div class="price">
+                            <span class="amount">Custom</span>
                         </div>
-                        <div class="team-members">
-                            <div class="member">
-                                <div class="member-info">
-                                    <img src="https://via.placeholder.com/40" alt="avatar">
-                                    <div>
-                                        <div class="member-name">赵六</div>
-                                        <div class="member-role">产品经理</div>
-                                    </div>
-                                </div>
-                                <div class="member-metrics">
-                                    <div class="metric">
-                                        <span class="metric-label">退货率</span>
-                                        <span class="metric-value">8.5%</span>
-                                    </div>
-                                    <div class="metric">
-                                        <span class="metric-label">边际成本</span>
-                                        <span class="metric-value">¥45</span>
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Full AI meeting assistant</li>
+                        <li><i class="fas fa-check"></i> Custom integrations</li>
+                        <li><i class="fas fa-check"></i> Advanced security</li>
+                        <li><i class="fas fa-check"></i> Dedicated support</li>
+                        <li><i class="fas fa-check"></i> SLA guarantees</li>
+                    </ul>
+                    <a href="#" class="plan-btn btn-secondary">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Customer Reviews</h2>
+                <p>Join 100,000+ satisfied users</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p>"Vibe Meet AI is hands down the best AI meeting note taker we've used. The accuracy is incredible and it saves our team hours every week!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face" alt="Sarah Johnson">
+                        <div class="author-info">
+                            <div class="author-name">Sarah Johnson</div>
+                            <div class="author-title">VP of Operations, TechCorp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p>"The Teams AI meeting notes feature is a game-changer. Our AI meeting minutes are always perfect and ready before we even leave the meeting room."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" alt="Mike Chen">
+                        <div class="author-info">
+                            <div class="author-name">Mike Chen</div>
+                            <div class="author-title">Product Manager, StartupXYZ</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p>"As someone who attends 20+ meetings per week, this AI meeting assistant has been life-changing. I never miss important details anymore!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b630?w=60&h=60&fit=crop&crop=face" alt="Emily Rodriguez">
+                        <div class="author-info">
+                            <div class="author-name">Emily Rodriguez</div>
+                            <div class="author-title">Sales Director, MegaCorp</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- OKR关联页面 -->
-        <section id="okr" class="content-section">
-            <div class="okr-container">
-                <h2>OKR关联 - 公司-部门-个人</h2>
-                <div class="okr-hierarchy">
-                    <!-- 公司层级 -->
-                    <div class="okr-level company-level">
-                        <h3><i class="fas fa-building"></i> 公司目标</h3>
-                        <div class="okr-card">
-                            <div class="okr-title">2024年度营收目标</div>
-                            <div class="okr-objective">实现年收入1.2亿元，利润率30%</div>
-                            <div class="okr-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 72%"></div>
-                                </div>
-                                <span>72% 完成</span>
-                            </div>
-                            <div class="okr-kr">
-                                <div class="kr-item">
-                                    <span>KR1: 网红分销收入达到7000万</span>
-                                    <span class="kr-progress">85%</span>
-                                </div>
-                                <div class="kr-item">
-                                    <span>KR2: 自营销售收入达到5000万</span>
-                                    <span class="kr-progress">65%</span>
-                                </div>
-                                <div class="kr-item">
-                                    <span>KR3: 整体利润率保持在30%以上</span>
-                                    <span class="kr-progress">75%</span>
-                                </div>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Ready to Transform Your Meetings?</h2>
+                    <p>Join thousands of teams using the best AI meeting note taker. Start your free trial today and experience the power of AI meeting assistance.</p>
+                    <div class="contact-benefits">
+                        <div class="benefit">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Setup in 30 Seconds</h4>
+                                <p>No credit card required for your AI meeting assistant trial</p>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- 部门层级 -->
-                    <div class="okr-level department-level">
-                        <h3><i class="fas fa-users"></i> 部门目标</h3>
-                        <div class="okr-grid">
-                            <div class="okr-card">
-                                <div class="okr-title">渠道拓展部</div>
-                                <div class="okr-objective">网红分销收入7000万</div>
-                                <div class="okr-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 85%"></div>
-                                    </div>
-                                    <span>85% 完成</span>
-                                </div>
-                                <div class="okr-kr">
-                                    <div class="kr-item">
-                                        <span>有效红人数量500+</span>
-                                        <span class="kr-progress">90%</span>
-                                    </div>
-                                    <div class="kr-item">
-                                        <span>场均GMV 2万+</span>
-                                        <span class="kr-progress">80%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="okr-card">
-                                <div class="okr-title">用户运营部</div>
-                                <div class="okr-objective">自营销售收入5000万</div>
-                                <div class="okr-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 65%"></div>
-                                    </div>
-                                    <span>65% 完成</span>
-                                </div>
-                                <div class="okr-kr">
-                                    <div class="kr-item">
-                                        <span>私域GMV 3000万</span>
-                                        <span class="kr-progress">70%</span>
-                                    </div>
-                                    <div class="kr-item">
-                                        <span>线下GMV 2000万</span>
-                                        <span class="kr-progress">60%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="okr-card">
-                                <div class="okr-title">产品部</div>
-                                <div class="okr-objective">成本控制与优化</div>
-                                <div class="okr-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 75%"></div>
-                                    </div>
-                                    <span>75% 完成</span>
-                                </div>
-                                <div class="okr-kr">
-                                    <div class="kr-item">
-                                        <span>退货率控制在5%以下</span>
-                                        <span class="kr-progress">60%</span>
-                                    </div>
-                                    <div class="kr-item">
-                                        <span>边际成本降低15%</span>
-                                        <span class="kr-progress">90%</span>
-                                    </div>
-                                </div>
+                        <div class="benefit">
+                            <i class="fas fa-headset"></i>
+                            <div>
+                                <h4>24/7 Support</h4>
+                                <p>Expert help whenever you need it</p>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- 个人层级 -->
-                    <div class="okr-level personal-level">
-                        <h3><i class="fas fa-user"></i> 个人目标</h3>
-                        <div class="okr-grid">
-                            <div class="okr-card">
-                                <div class="okr-title">张三 - 小红书BD</div>
-                                <div class="okr-objective">月度引流用户数1500+</div>
-                                <div class="okr-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 83%"></div>
-                                    </div>
-                                    <span>83% 完成</span>
-                                </div>
-                                <div class="okr-kr">
-                                    <div class="kr-item">
-                                        <span>笔记发布量50+</span>
-                                        <span class="kr-progress">100%</span>
-                                    </div>
-                                    <div class="kr-item">
-                                        <span>私域添加率12%+</span>
-                                        <span class="kr-progress">66%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="okr-card">
-                                <div class="okr-title">李四 - 渠道运营</div>
-                                <div class="okr-objective">维护有效红人数100+</div>
-                                <div class="okr-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 85%"></div>
-                                    </div>
-                                    <span>85% 完成</span>
-                                </div>
-                                <div class="okr-kr">
-                                    <div class="kr-item">
-                                        <span>开播率90%+</span>
-                                        <span class="kr-progress">95%</span>
-                                    </div>
-                                    <div class="kr-item">
-                                        <span>合作频次2次/月</span>
-                                        <span class="kr-progress">75%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="okr-card">
-                                <div class="okr-title">王五 - 社群运营</div>
-                                <div class="okr-objective">月度私域GMV20万+</div>
-                                <div class="okr-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 90%"></div>
-                                    </div>
-                                    <span>90% 完成</span>
-                                </div>
-                                <div class="okr-kr">
-                                    <div class="kr-item">
-                                        <span>直播转化率8%+</span>
-                                        <span class="kr-progress">87%</span>
-                                    </div>
-                                    <div class="kr-item">
-                                        <span>客单价400+</span>
-                                        <span class="kr-progress">93%</span>
-                                    </div>
-                                </div>
+                        <div class="benefit">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Enterprise Security</h4>
+                                <p>Your meeting data is always protected</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="contact-form">
+                    <h3>Start Your Free Trial</h3>
+                    <form id="contact-form">
+                        <input type="text" name="name" placeholder="Full Name" required>
+                        <input type="email" name="email" placeholder="Work Email" required>
+                        <input type="text" name="company" placeholder="Company Name" required>
+                        <select name="team-size" required>
+                            <option value="">Team Size</option>
+                            <option value="1-10">1-10 people</option>
+                            <option value="11-50">11-50 people</option>
+                            <option value="51-200">51-200 people</option>
+                            <option value="200+">200+ people</option>
+                        </select>
+                        <button type="submit" class="btn-primary">Get Started Free</button>
+                    </form>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about our AI meeting note taker</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How accurate is your AI meeting note taker?</h3>
+                    <p>Our AI meeting note taker achieves 98%+ accuracy, significantly higher than industry standards. We use advanced machine learning and natural language processing to ensure the most accurate AI meeting notes and minutes.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Does it work with Teams AI meeting notes?</h3>
+                    <p>Yes! Our AI meeting assistant integrates seamlessly with Microsoft Teams, providing native Teams AI meeting notes functionality. No additional plugins required.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How fast do I get my AI meeting minutes?</h3>
+                    <p>Our AI meeting minutes generator provides results within 1-2 minutes after your meeting ends. You'll have complete summaries, action items, and key decisions ready instantly.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is my meeting data secure?</h3>
+                    <p>Absolutely. We use enterprise-grade encryption and are SOC 2, GDPR, and HIPAA compliant. Your meeting data is processed securely and never shared with third parties.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-robot"></i>
+                        <span>Vibe Meet AI</span>
+                    </div>
+                    <p>The world's best AI meeting note taker and AI meeting assistant, trusted by 100,000+ professionals worldwide.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">AI Meeting Notes</a></li>
+                        <li><a href="#">Meeting Transcription</a></li>
+                        <li><a href="#">Teams Integration</a></li>
+                        <li><a href="#">Meeting Analytics</a></li>
+                        <li><a href="#">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#">Sales Teams</a></li>
+                        <li><a href="#">Customer Success</a></li>
+                        <li><a href="#">Remote Teams</a></li>
+                        <li><a href="#">Enterprise</a></li>
+                        <li><a href="#">Education</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Vibe Meet AI. All rights reserved. The best AI meeting note taker and AI meeting assistant platform.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

@@ -1,615 +1,443 @@
-// 页面加载完成后执行
+// DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // 初始化功能
+    // Navigation functionality
     initNavigation();
-    initCharts();
-    initTargetMap();
-    updateCurrentDate();
     
-    // 每30秒更新一次数据
-    setInterval(updateMetrics, 30000);
+    // Form handling
+    initForms();
+    
+    // Scroll animations
+    initScrollAnimations();
+    
+    // Mobile navigation
+    initMobileNav();
+    
+    // CTA button tracking
+    initCTATracking();
 });
 
-// 导航功能
+// Navigation functionality
 function initNavigation() {
-    const navLinks = document.querySelectorAll('.sidebar-menu a');
-    const contentSections = document.querySelectorAll('.content-section');
+    const navbar = document.querySelector('.navbar');
     
-    navLinks.forEach(link => {
+    // Change navbar background on scroll
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // 移除所有活动状态
-            navLinks.forEach(l => l.classList.remove('active'));
-            contentSections.forEach(section => section.classList.remove('active'));
-            
-            // 添加活动状态
-            this.classList.add('active');
-            
-            // 显示对应的内容区域
             const targetId = this.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-                
-                // 如果是目标地图页面，重新初始化地图
-                if (targetId === 'target-map') {
-                    setTimeout(() => {
-                        initTargetMap();
-                    }, 100);
-                }
-            }
-        });
-    });
-}
-
-// 初始化图表
-function initCharts() {
-    // 收入趋势图
-    const revenueCtx = document.getElementById('revenueChart');
-    if (revenueCtx) {
-        new Chart(revenueCtx, {
-            type: 'line',
-            data: {
-                labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-                datasets: [{
-                    label: '网红分销收入',
-                    data: [580, 620, 690, 750, 820, 880, 920, 850, 780, 850, 920, 980],
-                    borderColor: '#3498db',
-                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }, {
-                    label: '自营销售收入',
-                    data: [420, 480, 510, 590, 640, 680, 720, 760, 710, 750, 800, 850],
-                    borderColor: '#e74c3c',
-                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: false
-                    },
-                    legend: {
-                        position: 'top'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '¥' + value + '万';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-    
-    // 成本分析图
-    const costCtx = document.getElementById('costChart');
-    if (costCtx) {
-        new Chart(costCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['营销成本', '运营成本', '商品成本'],
-                datasets: [{
-                    data: [280, 180, 340],
-                    backgroundColor: ['#3498db', '#e74c3c', '#f39c12'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: false
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-    }
-}
-
-// 初始化目标地图
-function initTargetMap() {
-    const mapElement = document.getElementById('targetMap');
-    if (mapElement && typeof echarts !== 'undefined') {
-        const chart = echarts.init(mapElement);
-        
-        // 模拟地图数据
-        const geoData = {
-            "type": "FeatureCollection",
-            "features": [
-                {
-                    "type": "Feature",
-                    "properties": {
-                        "name": "华东区",
-                        "value": 3200000,
-                        "progress": 85
-                    },
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [121.4737, 31.2304]
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "properties": {
-                        "name": "华北区",
-                        "value": 2800000,
-                        "progress": 92
-                    },
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [116.4074, 39.9042]
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "properties": {
-                        "name": "华南区",
-                        "value": 2650000,
-                        "progress": 78
-                    },
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [113.2644, 23.1291]
-                    }
-                }
-            ]
-        };
-        
-        const option = {
-            title: {
-                text: '全国业务分布',
-                left: 'center',
-                textStyle: {
-                    color: '#2c3e50',
-                    fontSize: 16,
-                    fontWeight: 600
-                }
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: function(params) {
-                    if (params.data) {
-                        return `
-                            <div style="padding: 10px;">
-                                <strong>${params.data.name}</strong><br/>
-                                收入: ¥${(params.data.value / 10000).toFixed(1)}万<br/>
-                                完成度: ${params.data.progress}%
-                            </div>
-                        `;
-                    }
-                    return '';
-                }
-            },
-            visualMap: {
-                show: false,
-                min: 0,
-                max: 100,
-                inRange: {
-                    color: ['#fedcdc', '#e74c3c']
-                }
-            },
-            geo: {
-                map: 'china',
-                roam: true,
-                zoom: 1.2,
-                center: [104.0, 35.0],
-                itemStyle: {
-                    areaColor: '#f5f5f5',
-                    borderColor: '#ddd'
-                },
-                emphasis: {
-                    itemStyle: {
-                        areaColor: '#e8f4f8'
-                    }
-                }
-            },
-            series: [
-                {
-                    name: '业务分布',
-                    type: 'scatter',
-                    coordinateSystem: 'geo',
-                    data: geoData.features.map(feature => ({
-                        name: feature.properties.name,
-                        value: [
-                            feature.geometry.coordinates[0],
-                            feature.geometry.coordinates[1],
-                            feature.properties.value
-                        ],
-                        progress: feature.properties.progress
-                    })),
-                    symbolSize: function(val) {
-                        return Math.sqrt(val[2]) / 1000;
-                    },
-                    itemStyle: {
-                        color: '#3498db'
-                    },
-                    emphasis: {
-                        itemStyle: {
-                            color: '#2980b9'
-                        }
-                    }
-                }
-            ]
-        };
-        
-        // 加载中国地图
-        fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
-            .then(response => response.json())
-            .then(chinaJson => {
-                echarts.registerMap('china', chinaJson);
-                chart.setOption(option);
-            })
-            .catch(error => {
-                console.log('地图加载失败，使用备用方案');
-                // 备用方案：显示散点图
-                const backupOption = {
-                    title: {
-                        text: '全国业务分布',
-                        left: 'center',
-                        textStyle: {
-                            color: '#2c3e50',
-                            fontSize: 16,
-                            fontWeight: 600
-                        }
-                    },
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: function(params) {
-                            return `
-                                <div style="padding: 10px;">
-                                    <strong>${params.data.name}</strong><br/>
-                                    收入: ¥${(params.data.value / 10000).toFixed(1)}万<br/>
-                                    完成度: ${params.data.progress}%
-                                </div>
-                            `;
-                        }
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: ['华东区', '华北区', '华南区']
-                    },
-                    yAxis: {
-                        type: 'value',
-                        axisLabel: {
-                            formatter: function(value) {
-                                return '¥' + (value / 10000).toFixed(0) + '万';
-                            }
-                        }
-                    },
-                    series: [{
-                        data: [
-                            {name: '华东区', value: 3200000, progress: 85},
-                            {name: '华北区', value: 2800000, progress: 92},
-                            {name: '华南区', value: 2650000, progress: 78}
-                        ],
-                        type: 'bar',
-                        itemStyle: {
-                            color: '#3498db'
-                        },
-                        emphasis: {
-                            itemStyle: {
-                                color: '#2980b9'
-                            }
-                        }
-                    }]
-                };
-                chart.setOption(backupOption);
-            });
-        
-        // 响应式处理
-        window.addEventListener('resize', function() {
-            chart.resize();
-        });
-    }
-}
-
-// 更新当前日期
-function updateCurrentDate() {
-    const dateElement = document.getElementById('currentDate');
-    if (dateElement) {
-        const now = new Date();
-        const options = { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            weekday: 'long'
-        };
-        dateElement.textContent = now.toLocaleDateString('zh-CN', options);
-    }
-}
-
-// 更新指标数据（模拟实时更新）
-function updateMetrics() {
-    // 模拟数据变化
-    const metrics = [
-        { selector: '.dashboard-cards .card:nth-child(1) .metric-value', baseValue: 2580000, variance: 50000 },
-        { selector: '.dashboard-cards .card:nth-child(2) .metric-value', baseValue: 8650000, variance: 100000 },
-        { selector: '.dashboard-cards .card:nth-child(3) .metric-value', baseValue: 6070000, variance: 80000 },
-        { selector: '.dashboard-cards .card:nth-child(4) .metric-value', baseValue: 29.8, variance: 1.5, isPercent: true }
-    ];
-    
-    metrics.forEach(metric => {
-        const element = document.querySelector(metric.selector);
-        if (element) {
-            const variation = (Math.random() - 0.5) * 2 * metric.variance;
-            const newValue = metric.baseValue + variation;
             
-            if (metric.isPercent) {
-                element.textContent = newValue.toFixed(1) + '%';
-            } else {
-                element.textContent = '¥' + newValue.toLocaleString('zh-CN');
-            }
-        }
-    });
-    
-    // 更新团队指标
-    updateTeamMetrics();
-}
-
-// 更新团队指标
-function updateTeamMetrics() {
-    const teamMetrics = [
-        { selector: '.member:nth-child(1) .metric-value', values: ['1,280', '12.8%'] },
-        { selector: '.member:nth-child(2) .metric-value', values: ['88', '¥16,200'] }
-    ];
-    
-    // 模拟少量数据变化
-    teamMetrics.forEach(metric => {
-        const elements = document.querySelectorAll(metric.selector);
-        elements.forEach((element, index) => {
-            if (metric.values[index] && Math.random() < 0.3) { // 30%概率更新
-                const baseValue = metric.values[index];
-                // 添加小幅变化
-                element.textContent = baseValue;
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Close mobile menu if open
+                const navMenu = document.getElementById('nav-menu');
+                const navToggle = document.getElementById('nav-toggle');
+                if (navMenu && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
             }
         });
     });
 }
 
-// 公式框交互效果
-function initFormulaInteraction() {
-    const formulaBoxes = document.querySelectorAll('.formula-box');
+// Mobile navigation
+function initMobileNav() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
     
-    formulaBoxes.forEach(box => {
-        box.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px) scale(1.02)';
-            this.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.15)';
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
         });
         
-        box.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-            this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
         });
-    });
-}
-
-// 进度条动画
-function animateProgressBars() {
-    const progressBars = document.querySelectorAll('.progress-fill');
-    
-    progressBars.forEach(bar => {
-        const width = bar.style.width;
-        bar.style.width = '0%';
-        
-        setTimeout(() => {
-            bar.style.width = width;
-        }, 500);
-    });
-}
-
-// 初始化所有交互
-function initAllInteractions() {
-    initFormulaInteraction();
-    animateProgressBars();
-}
-
-// 页面完全加载后初始化交互
-window.addEventListener('load', function() {
-    initAllInteractions();
-});
-
-// 主题切换功能（可选）
-function toggleTheme() {
-    const body = document.body;
-    const currentTheme = body.getAttribute('data-theme');
-    
-    if (currentTheme === 'dark') {
-        body.removeAttribute('data-theme');
-    } else {
-        body.setAttribute('data-theme', 'dark');
     }
 }
 
-// 导出数据功能
-function exportData() {
-    const data = {
-        timestamp: new Date().toISOString(),
-        metrics: {
-            totalProfit: 2580000,
-            totalRevenue: 8650000,
-            totalCost: 6070000,
-            profitMargin: 29.8
-        },
-        teams: {
-            channel: {
-                name: '渠道拓展组',
-                members: [
-                    { name: '张三', role: '小红书BD', metrics: { users: 1250, conversion: 12.5 } },
-                    { name: '李四', role: '渠道运营', metrics: { influencers: 85, avgGMV: 15800 } }
-                ]
-            },
-            operations: {
-                name: '用户运营组',
-                members: [
-                    { name: '王五', role: '社群运营', metrics: { privateGMV: 180000, userLTV: 1250 } }
-                ]
-            }
-        }
+// Form handling
+function initForms() {
+    const contactForm = document.getElementById('contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            // Simulate form submission (replace with actual API call)
+            setTimeout(() => {
+                // Google Analytics event tracking
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        'event_category': 'Contact',
+                        'event_label': 'Free Trial Signup',
+                        'value': 1
+                    });
+                }
+                
+                // Show success message
+                showNotification('Thank you! We\'ll be in touch soon.', 'success');
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Reset button
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                
+            }, 2000);
+        });
+    }
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    // Add styles
+    Object.assign(notification.style, {
+        position: 'fixed',
+        top: '20px',
+        right: '20px',
+        padding: '1rem 1.5rem',
+        backgroundColor: type === 'success' ? '#10b981' : '#4f46e5',
+        color: 'white',
+        borderRadius: '8px',
+        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
+        zIndex: '9999',
+        fontSize: '0.9rem',
+        fontWeight: '500',
+        transform: 'translateX(400px)',
+        transition: 'transform 0.3s ease'
+    });
+    
+    document.body.appendChild(notification);
+    
+    // Slide in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 5000);
+}
+
+// Scroll animations
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
     
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'bi-dashboard-data.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements
+    document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card, .step, .faq-item').forEach(el => {
+        observer.observe(el);
+    });
 }
 
-// 打印功能
-function printDashboard() {
-    window.print();
-}
-
-// 键盘快捷键
-document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey || e.metaKey) {
-        switch (e.key) {
-            case 'e':
-                e.preventDefault();
-                exportData();
-                break;
-            case 'p':
-                e.preventDefault();
-                printDashboard();
-                break;
-        }
-    }
-});
-
-// 移动端适配
-function initMobileSupport() {
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-    
-    // 创建移动端菜单按钮
-    const menuButton = document.createElement('button');
-    menuButton.className = 'mobile-menu-button';
-    menuButton.innerHTML = '<i class="fas fa-bars"></i>';
-    menuButton.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 1001;
-        background: #3498db;
-        color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        display: none;
-        cursor: pointer;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    `;
-    
-    document.body.appendChild(menuButton);
-    
-    // 检查屏幕尺寸
-    function checkScreenSize() {
-        if (window.innerWidth <= 768) {
-            menuButton.style.display = 'block';
-        } else {
-            menuButton.style.display = 'none';
-            sidebar.classList.remove('active');
-        }
-    }
-    
-    // 菜单按钮点击事件
-    menuButton.addEventListener('click', function() {
-        sidebar.classList.toggle('active');
+// CTA button tracking
+function initCTATracking() {
+    // Track all primary CTA buttons
+    document.querySelectorAll('.btn-primary').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const buttonText = this.textContent.trim();
+            const section = this.closest('section')?.id || 'unknown';
+            
+            // Google Analytics event tracking
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'cta_click', {
+                    'event_category': 'CTA',
+                    'event_label': `${section} - ${buttonText}`,
+                    'value': 1
+                });
+            }
+            
+            // Console log for development
+            console.log(`CTA clicked: ${buttonText} in section: ${section}`);
+        });
     });
     
-    // 点击主内容区域关闭菜单
-    mainContent.addEventListener('click', function() {
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove('active');
-        }
+    // Track demo button clicks
+    document.querySelectorAll('a[href="#demo"]').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Google Analytics event tracking
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'demo_request', {
+                    'event_category': 'Engagement',
+                    'event_label': 'Demo Video Request',
+                    'value': 1
+                });
+            }
+            
+            // Show demo modal or redirect to demo page
+            showDemoModal();
+        });
     });
-    
-    // 监听屏幕尺寸变化
-    window.addEventListener('resize', checkScreenSize);
-    checkScreenSize();
 }
 
-// 初始化移动端支持
-document.addEventListener('DOMContentLoaded', function() {
-    initMobileSupport();
-});
-
-// 添加加载动画
-function showLoadingAnimation() {
-    const loader = document.createElement('div');
-    loader.className = 'loading-overlay';
-    loader.innerHTML = `
-        <div class="loading-spinner">
-            <div class="spinner"></div>
-            <p>正在加载数据...</p>
+// Demo modal
+function showDemoModal() {
+    // Create modal backdrop
+    const backdrop = document.createElement('div');
+    backdrop.className = 'demo-modal-backdrop';
+    Object.assign(backdrop.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        zIndex: '9999',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: '0',
+        transition: 'opacity 0.3s ease'
+    });
+    
+    // Create modal content
+    const modal = document.createElement('div');
+    modal.className = 'demo-modal';
+    Object.assign(modal.style, {
+        backgroundColor: 'white',
+        borderRadius: '16px',
+        padding: '2rem',
+        maxWidth: '500px',
+        width: '90%',
+        textAlign: 'center',
+        transform: 'scale(0.8)',
+        transition: 'transform 0.3s ease'
+    });
+    
+    modal.innerHTML = `
+        <h3 style="margin-bottom: 1rem; color: #1e293b; font-size: 1.5rem;">Watch Vibe Meet AI in Action</h3>
+        <p style="margin-bottom: 2rem; color: #64748b; line-height: 1.6;">
+            See how our AI meeting assistant transforms your meetings with real-time transcription and smart summaries.
+        </p>
+        <div style="margin-bottom: 2rem;">
+            <div style="width: 100%; height: 250px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                <i class="fas fa-play" style="font-size: 3rem; color: #4f46e5;"></i>
+            </div>
+            <p style="font-size: 0.9rem; color: #64748b;">Demo video coming soon!</p>
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <button class="btn-secondary" onclick="this.closest('.demo-modal-backdrop').remove()">Close</button>
+            <button class="btn-primary" onclick="window.location.href='#contact'">Start Free Trial</button>
         </div>
     `;
-    loader.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    `;
     
-    const spinnerStyles = `
-        <style>
-            .loading-spinner {
-                text-align: center;
-                color: #2c3e50;
-            }
-            .spinner {
-                width: 40px;
-                height: 40px;
-                border: 4px solid #e9ecef;
-                border-top: 4px solid #3498db;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-                margin: 0 auto 20px;
-            }
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        </style>
-    `;
+    backdrop.appendChild(modal);
+    document.body.appendChild(backdrop);
     
-    document.head.insertAdjacentHTML('beforeend', spinnerStyles);
-    document.body.appendChild(loader);
-    
-    // 2秒后移除加载动画
+    // Animate in
     setTimeout(() => {
-        loader.remove();
-    }, 2000);
+        backdrop.style.opacity = '1';
+        modal.style.transform = 'scale(1)';
+    }, 100);
+    
+    // Close on backdrop click
+    backdrop.addEventListener('click', function(e) {
+        if (e.target === backdrop) {
+            backdrop.remove();
+        }
+    });
+    
+    // Close on escape key
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            backdrop.remove();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    document.addEventListener('keydown', handleEscape);
 }
 
-// 页面加载时显示加载动画
-window.addEventListener('load', function() {
-    showLoadingAnimation();
-}); 
+// Counter animation for statistics
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                counter.textContent = Math.floor(current) + (counter.textContent.includes('%') ? '%' : '+');
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target + (counter.textContent.includes('%') ? '%' : '+');
+            }
+        };
+        
+        // Start animation when element is visible
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                updateCounter();
+                observer.unobserve(counter);
+            }
+        });
+        
+        observer.observe(counter);
+    });
+}
+
+// Initialize counter animations when DOM is ready
+document.addEventListener('DOMContentLoaded', animateCounters);
+
+// FAQ accordion functionality
+function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('h3');
+        const answer = item.querySelector('p');
+        
+        if (question && answer) {
+            // Add click handler to question
+            question.style.cursor = 'pointer';
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+                
+                // Close other FAQ items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            });
+        }
+    });
+}
+
+// Initialize FAQ when DOM is ready
+document.addEventListener('DOMContentLoaded', initFAQ);
+
+// Pricing calculator (future enhancement)
+function initPricingCalculator() {
+    // This could be expanded to include a dynamic pricing calculator
+    const pricingCards = document.querySelectorAll('.pricing-card');
+    
+    pricingCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
+
+// Performance monitoring
+function initPerformanceMonitoring() {
+    // Monitor page load time
+    window.addEventListener('load', function() {
+        const loadTime = performance.now();
+        
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_load_time', {
+                'event_category': 'Performance',
+                'event_label': 'Page Load',
+                'value': Math.round(loadTime)
+            });
+        }
+        
+        console.log(`Page loaded in ${Math.round(loadTime)}ms`);
+    });
+}
+
+// Initialize all enhancements
+document.addEventListener('DOMContentLoaded', function() {
+    initPricingCalculator();
+    initPerformanceMonitoring();
+});
+
+// Utility functions
+const utils = {
+    // Debounce function for performance
+    debounce: (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+    
+    // Check if element is in viewport
+    isInViewport: (element) => {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    },
+    
+    // Format numbers for display
+    formatNumber: (num) => {
+        return new Intl.NumberFormat().format(num);
+    }
+};
+
+// Export for potential use in other scripts
+window.VibeMeetAI = {
+    utils,
+    showNotification,
+    showDemoModal
+}; 
