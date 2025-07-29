@@ -118,5 +118,11 @@
     "typescript": "^5.7.2",
     "vercel": "39.1.1",
     "wrangler": "3.97.0"
+  },
+  "overrides": {
+    "@devnomic/marquee": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
   }
 }
