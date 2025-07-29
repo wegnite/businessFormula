@@ -1,232 +1,158 @@
-# 业务公式 BI 看板
+# Vibe Meet AI - Best AI Meeting Note Taker
 
-这是一个基于Web的业务公式BI看板系统，用于展示和分析业务指标、公式拆解、目标管理和团队协作。
+Vibe Meet AI is the world's most advanced AI-powered meeting assistant that automatically generates accurate meeting notes, summaries, and action items. Trusted by over 100,000+ professionals worldwide.
 
-## 功能特性
+## 🚀 Features
 
-### 📊 总览仪表板
-- **核心指标监控**：实时显示总利润、总收入、总成本、利润率等关键指标
-- **趋势分析**：动态图表展示收入趋势和成本分析
-- **数据实时更新**：每30秒自动更新指标数据
+### 🤖 AI-Powered Meeting Notes
+- **Real-time Transcription**: Get live, accurate transcriptions during your meetings
+- **Smart Summaries**: AI-generated meeting summaries with key points and decisions
+- **Action Items**: Automatically extract and organize action items and follow-ups
+- **Multi-language Support**: Support for 50+ languages and dialects
 
-### 🧮 业务公式拆解
-- **核心公式**：总利润 = 总收入 - 总成本
-- **一级拆解**：按渠道维度分解（网红分销收入 + 自营销售收入）
-- **二级拆解**：按岗位责任源细分各项指标
-- **成本控制**：营销成本、运营成本、商品成本的详细公式
-- **KPI映射**：责任岗位与利润影响因子的对应关系
+### 🔗 Seamless Integrations
+- **Microsoft Teams**: Native Teams AI meeting notes integration
+- **Zoom**: Direct Zoom meeting transcription and analysis
+- **Google Meet**: Real-time Google Meet note-taking
+- **Slack**: Share meeting summaries directly to Slack channels
+- **Email**: Automated email summaries to all participants
 
-### 🗺️ 目标地图
-- **地理分布**：全国业务分布可视化
-- **区域指标**：华东、华北、华南三大区域的业绩监控
-- **进度追踪**：各区域目标完成度的实时显示
+### 📊 Advanced Analytics
+- **Meeting Insights**: Track meeting effectiveness and participation
+- **Sentiment Analysis**: Understand meeting tone and engagement levels
+- **Speaker Analytics**: Individual speaker time and contribution analysis
+- **Trend Reports**: Long-term meeting productivity insights
 
-### 👥 协同看板
-- **团队管理**：渠道拓展组、用户运营组、产品经理组
-- **人员绑定**：每个团队成员对应具体的业务指标
-- **实时监控**：个人业绩指标的实时更新
+### 🔒 Enterprise Security
+- **SOC 2 Compliant**: Highest security standards for enterprise data
+- **GDPR & HIPAA**: Full compliance with data protection regulations
+- **End-to-End Encryption**: Your meeting data is always secure
+- **Custom Retention**: Flexible data retention policies
 
-### 🎯 OKR关联
-- **三级目标**：公司-部门-个人的目标穿透
-- **进度可视化**：各级OKR完成进度的直观展示
-- **KR分解**：关键结果的详细追踪
+## 💼 Use Cases
 
-## 技术架构
+### Sales Teams
+- Capture all client requirements and objections
+- Generate follow-up action items automatically
+- Track deal progression and key decisions
+- Share summaries with team members instantly
 
-### 前端技术
-- **HTML5**：语义化标签，现代Web标准
-- **CSS3**：响应式设计，现代UI效果
-- **JavaScript (ES6+)**：原生JavaScript，无框架依赖
-- **Chart.js**：图表可视化库
-- **ECharts**：地图可视化和高级图表
-- **Font Awesome**：图标库
+### Customer Success
+- Document customer feedback and requests
+- Track support issues and resolutions
+- Maintain comprehensive customer interaction history
+- Improve response times with automated summaries
 
-### 核心特性
-- **响应式设计**：支持桌面、平板、手机等多种设备
-- **现代UI**：Material Design风格，美观大方
-- **交互体验**：丰富的动画效果和交互反馈
-- **数据可视化**：多种图表类型，直观展示数据
+### Remote Teams
+- Keep distributed teams aligned with meeting summaries
+- Ensure nothing is missed in virtual meetings
+- Create searchable meeting archives
+- Improve async collaboration
 
-## 快速开始
+### HR & Recruiting
+- Document interview sessions comprehensively
+- Track candidate evaluation criteria
+- Maintain compliant interview records
+- Streamline hiring process documentation
 
-### 1. 下载项目
-```bash
-# 克隆项目或下载项目文件
-git clone [项目地址]
-# 或直接下载ZIP文件并解压
-```
+### Project Management
+- Capture project requirements and changes
+- Track milestone discussions and decisions
+- Generate project status summaries
+- Maintain project communication archives
 
-### 2. 本地运行
-由于项目使用了现代Web技术，需要通过HTTP服务器运行：
+## 🎯 Benefits
 
-#### 方法一：使用Python（推荐）
-```bash
-# Python 3.x
-python -m http.server 8000
+### Save Time
+- **90% Time Reduction**: Cut meeting documentation time by 90%
+- **Instant Summaries**: Get meeting summaries within 2 minutes
+- **Automated Distribution**: Share notes automatically to all participants
+- **Search & Find**: Quickly find specific information across all meetings
 
-# Python 2.x
-python -m SimpleHTTPServer 8000
-```
+### Improve Accuracy
+- **98%+ Accuracy**: Industry-leading transcription accuracy
+- **Context Understanding**: AI understands meeting context and nuance
+- **Speaker Identification**: Accurate attribution of comments to speakers
+- **Technical Terms**: Handles industry-specific terminology
 
-#### 方法二：使用Node.js
-```bash
-# 安装http-server
-npm install -g http-server
+### Enhance Collaboration
+- **Real-time Sharing**: Share notes in real-time during meetings
+- **Action Tracking**: Never miss follow-up tasks again
+- **Decision History**: Track how decisions were made over time
+- **Team Alignment**: Keep everyone on the same page
 
-# 运行服务器
-http-server -p 8000
-```
+## 🏆 Why Choose Vibe Meet AI?
 
-#### 方法三：使用Live Server（VS Code插件）
-1. 安装VS Code的Live Server插件
-2. 右键点击index.html文件
-3. 选择"Open with Live Server"
+### Superior AI Technology
+- Latest GPT-4 and Claude AI models for maximum accuracy
+- Continuous learning and improvement algorithms
+- Custom AI training for your industry and terminology
+- Advanced natural language processing capabilities
 
-### 3. 访问系统
-打开浏览器访问：`http://localhost:8000`
+### User-Friendly Interface
+- Intuitive dashboard for all your meetings
+- Mobile-responsive design for on-the-go access
+- Customizable templates for different meeting types
+- Easy export options (PDF, Word, Markdown)
 
-## 项目结构
+### Scalable Solutions
+- Individual plans starting at $0/month
+- Team plans for growing businesses
+- Enterprise solutions with custom features
+- API access for custom integrations
 
-```
-businessFormula/
-├── index.html          # 主页面
-├── styles.css          # 样式文件
-├── script.js           # 主要JavaScript逻辑
-├── README.md           # 项目说明文档
-└── assets/             # 资源文件夹（如需要）
-```
+### Exceptional Support
+- 24/7 customer support for all users
+- Dedicated success manager for enterprise clients
+- Comprehensive knowledge base and tutorials
+- Regular training webinars and best practices
 
-## 业务公式说明
+## 📈 Performance Metrics
 
-### 核心公式
-```
-总利润 = 总收入 - 总成本
-      = (网红分销收入 + 自营销售收入) - (商品成本 + 营销成本 + 运营成本)
-```
+- **100,000+** Active Users Worldwide
+- **98.5%** Transcription Accuracy Rate
+- **4.9/5** Average Customer Rating
+- **90%** Reduction in Meeting Documentation Time
+- **95%** Customer Retention Rate
+- **50+** Languages Supported
 
-### 一级拆解（渠道维度）
-```
-网红分销收入 = Σ(有效红人数 × 场均GMV × 合作频次)
-自营销售收入 = 私域GMV + 线下GMV
-```
+## 🛡️ Security & Compliance
 
-### 二级拆解（岗位责任源）
-```
-私域GMV = 引流用户数 × (直播转化率 × 直播客单价 + 社群转化率 × 社群客单价)
-线下GMV = 门店数 × 月均店效
-引流用户数 = 笔记发布量 × 单篇曝光量 × 点击率 × 留资率 × 私域添加率
-有效红人数 = 签约红人数 × 开播率 × (1 - 退货率)
-```
+### Data Protection
+- All data encrypted in transit and at rest
+- Regular security audits and penetration testing
+- Compliance with major international standards
+- Granular access controls and permissions
 
-### 成本控制公式
-```
-营销成本 = Σ(红人GMV × 佣金率) + 内容制作费 + k × 引流用户数
-运营成本 = 人力成本 + 物流成本 + 系统维护费
-商品成本 = 销售件数 × 单件成本 × (1 + 损耗率)
-```
+### Privacy First
+- No data sharing with third parties
+- Transparent privacy policies
+- User control over data retention
+- Right to data deletion and portability
 
-## 使用说明
+## 🌐 Getting Started
 
-### 导航操作
-- 左侧侧边栏提供5个主要功能模块
-- 点击对应图标可切换不同页面
-- 移动端支持触摸滑动和菜单按钮
+### Quick Setup
+1. Sign up for free at [vibemeet.ai](https://vibemeet.ai)
+2. Connect your preferred meeting platform
+3. Start your first AI-powered meeting
+4. Get instant, accurate meeting notes
 
-### 数据交互
-- 指标卡片显示实时数据和变化趋势
-- 图表支持悬停查看详细数据
-- 地图可以缩放和拖拽查看不同区域
+### Free Trial
+- 5 hours of AI meeting transcription
+- Basic meeting summaries and action items
+- Support for up to 3 meeting participants
+- Email customer support
 
-### 快捷键
-- `Ctrl+E`：导出数据
-- `Ctrl+P`：打印看板
+## 📞 Contact & Support
 
-## 自定义配置
+- **Website**: [https://vibemeet.ai](https://vibemeet.ai)
+- **Email**: support@vibemeet.ai
+- **Phone**: 1-800-VIBE-AI1
+- **Live Chat**: Available 24/7 on our website
 
-### 修改数据源
-在`script.js`文件中修改数据：
-```javascript
-// 修改指标数据
-const metrics = [
-    { selector: '.card:nth-child(1) .metric-value', baseValue: 2580000, variance: 50000 },
-    // 添加更多指标...
-];
+## 📄 License
 
-// 修改团队数据
-const teamData = {
-    // 自定义团队信息...
-};
-```
+Copyright © 2024 Vibe Meet AI. All rights reserved.
 
-### 修改样式
-在`styles.css`文件中自定义：
-```css
-/* 修改主题颜色 */
-:root {
-    --primary-color: #3498db;
-    --secondary-color: #2c3e50;
-    --accent-color: #e74c3c;
-}
-```
-
-### 添加新功能
-1. 在`index.html`中添加新的页面结构
-2. 在`styles.css`中添加对应样式
-3. 在`script.js`中添加交互逻辑
-
-## 部署说明
-
-### 静态部署
-项目为纯静态页面，可直接部署到：
-- GitHub Pages
-- Netlify
-- Vercel
-- 阿里云OSS
-- 腾讯云COS
-
-### 服务器部署
-```bash
-# 将项目文件上传到服务器
-# 配置Nginx或Apache指向项目目录
-# 确保支持HTTPS（可选）
-```
-
-## 浏览器兼容性
-
-- Chrome 60+
-- Firefox 60+
-- Safari 12+
-- Edge 79+
-- 移动端浏览器
-
-## 常见问题
-
-### Q: 为什么图表不显示？
-A: 请确保通过HTTP服务器访问，不要直接双击HTML文件打开。
-
-### Q: 如何修改业务公式？
-A: 编辑`index.html`文件中的业务公式部分，修改对应的公式内容。
-
-### Q: 如何添加新的指标？
-A: 在`script.js`中的`updateMetrics`函数中添加新的指标配置。
-
-### Q: 移动端显示异常怎么办？
-A: 检查浏览器兼容性，确保使用较新版本的移动浏览器。
-
-## 更新日志
-
-### v1.0.0
-- 初始版本发布
-- 实现基础的BI看板功能
-- 支持业务公式拆解和可视化
-- 添加OKR关联和协同看板功能
-
-## 技术支持
-
-如需技术支持或定制开发，请联系：
-- 邮箱：support@example.com
-- 电话：400-xxx-xxxx
-
-## 许可证
-
-本项目仅供学习和演示使用，请勿用于商业用途。 
+This software is proprietary and confidential. Unauthorized copying, distribution, or modification is strictly prohibited. 

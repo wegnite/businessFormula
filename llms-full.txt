@@ -152,7 +152,7 @@ Vibe Meet AI takes data security and privacy seriously:
 
 ### Free Trial
 Start using Vibe Meet AI immediately with no credit card required:
-1. Sign up at https://vibemeetai.com/#contact
+1. Sign up at https://vibemeet.ai/#contact
 2. Connect your meeting platform
 3. Join your first meeting with AI assistance
 4. Receive instant meeting minutes
